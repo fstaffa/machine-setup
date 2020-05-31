@@ -1,0 +1,104 @@
+---
+- hosts: all
+  tasks:
+    - name: Define user
+      set_fact:
+        username: "mathematician314"
+    - name: Get fnm_user from passwd database
+      getent:
+        database: passwd
+        key: "{{ username }}"
+        split: ":"
+    - name: Define user_home
+      set_fact:
+        user_home: "{{ getent_passwd[username][4] }}"
+    - name: Define bins folder
+      set_fact:
+        bin_folder: "{{ user_home }}/data/bin"
+    - name: Create bin folder
+      file:
+        owner: "{{ username }}"
+        path: "{{ bin_folder }}"
+        state: directory
+    - name: Install utilities
+      apt:
+        pkg:
+          - git
+          - fish
+          - docker
+          - curl
+          - tmux
+          - fzf
+          - fasd
+          - python3
+          - jq
+          - lftp
+          - silversearcher-ag
+    - name: Set user settings
+      user:
+        name: "{{ username }}"
+        shell: /usr/bin/fish
+
+    - name: "Ansible | Print a variable"
+      debug:
+        msg: "The operating system is {{ user_home }}"
+    - name: Install fnm dependencies utilities
+      apt:
+        pkg:
+          - unzip
+          - curl
+          - xz-utils
+          - netbase
+
+    - name: Install fnm
+      become: true
+      become_user: "{{username}}"
+      shell:
+        cmd: |
+          curl -fsSL https://github.com/Schniz/fnm/raw/master/.ci/install.sh | \
+            bash -s -- --skip-shell --install-dir {{ bin_folder }}
+        executable: /bin/bash
+      args:
+        creates: "{{ bin_folder }}/fnm"
+    - name: Install chezmoi
+      become: true
+      become_user: "{{username}}"
+      shell:
+        cmd: |
+          curl -fsSL https://git.io/chezmoi | \
+            bash -s -- -b {{ bin_folder }}
+        executable: /bin/bash
+      args:
+        creates: "{{ bin_folder}}/chezmoi"
+    - name: Chezmoi init
+      become: true
+      become_user: "{{username}}"
+      shell:
+        cmd: |
+          {{ bin_folder }}/chezmoi init https://github.com/fstaffa/dotfiles.git
+      args:
+        creates: "{{ user_home }}/.local/share/chezmoi/dot_tmux.conf"
+    - name: Chezmoi get data
+      become: true
+      become_user: "{{username}}"
+      shell:
+        cmd: |
+          {{ bin_folder }}/chezmoi apply
+      args:
+        creates: "{{ user_home }}/.tmux.conf"
+
+    - name: Install asdf
+      become: true
+      become_user: "{{username}}"
+      git:
+        repo: https://github.com/asdf-vm/asdf.git
+        dest: "{{ user_home }}/.asdf"
+        version: v0.7.8
+
+    - name: Set correct paths
+      become: true
+      become_user: "{{username}}"
+      copy:
+        dest: "{{ user_home }}/.config/fish/conf.d/linux-workstation.fish"
+        content: |
+          set -gx PATH $PATH {{ bin_folder }}
