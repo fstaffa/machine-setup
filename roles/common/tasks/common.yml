@@ -1,0 +1,76 @@
+---
+- name: Create data folder
+  file:
+    path: "{{ bin_folder }}"
+    state: directory
+- name: Create bin folder
+  file:
+    path: "{{ bin_folder }}"
+    state: directory
+- name: Install Fnm
+  become: true
+  become_user: "{{username}}"
+  import_tasks: "fnm.yml"
+
+- name: Install chezmoi
+  shell:
+    cmd: |
+      curl -fsSL https://git.io/chezmoi | \
+        bash -s -- -b {{ bin_folder }}
+    executable: /bin/bash
+  args:
+    creates: "{{ bin_folder}}/chezmoi"
+- name: Chezmoi init
+  shell:
+    cmd: |
+      {{ bin_folder }}/chezmoi init https://github.com/fstaffa/dotfiles.git
+  args:
+    creates: "{{ user_home }}/.local/share/chezmoi/dot_tmux.conf"
+- name: Chezmoi get data
+  shell:
+    cmd: |
+      {{ bin_folder }}/chezmoi apply
+  args:
+    creates: "{{ user_home }}/.tmux.conf"
+
+- name: Install asdf
+  git:
+    repo: https://github.com/asdf-vm/asdf.git
+    dest: "{{ user_home }}/.asdf"
+    version: v0.7.8
+
+- name: Install spacemacs
+  git:
+    repo: https://github.com/syl20bnr/spacemacs.git
+    dest: "{{ user_home }}/.emacs.d"
+    version: develop
+
+- name: Install spacemacs config
+  git:
+    repo: https://github.com/fstaffa/dotspacemacs.git
+    dest: "{{ user_home }}/.spacemacs.d"
+
+- name: Install pipx
+  pip:
+    name: pipx
+
+- name: Python on startup
+  copy:
+    dest: "{{ user_home }}/.config/fish/conf.d/python.fish"
+    content: |
+      set -gx PATH $PATH "{{ user_home }}/.local/bin"
+      register-python-argcomplete --shell fish pipx | .
+
+- name: Install youtube-dl
+  command:
+    cmd:
+      python3 -m pipx install youtube-dl
+    creates:
+      "{{ user_home }}/.local/bin/youtube-dl"
+
+- name: Install the fuck
+  command:
+    cmd:
+      python3 -m pipx install thefuck
+    creates:
+      "{{ user_home }}/.local/bin/thefuck"

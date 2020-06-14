@@ -1,0 +1,9 @@
+---
+# tasks file for work 
+ - name: Clone cimpress projects
+   git:
+     repo: "{{ item.repo }}"
+     dest: "{{ user_home }}/data/cimpress/sapidus/{{ item.folder }}"
+   loop:
+     - { repo: git@gitlab.com:Cimpress-Technology/Sapidus/logistics-configuration-ui.git, folder: logistics-configuration-ui }
+     - { repo: git@gitlab.com:Cimpress-Technology/Sapidus/configuration-service.git, folder: configuration-service }

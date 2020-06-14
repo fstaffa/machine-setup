@@ -1,0 +1,17 @@
+---
+# tasks file for wsl
+- name: Copy ssh keys
+  copy:
+    src: /mnt/c/Users/filip/.ssh/{{ item }}
+    owner: "{{ username }}"
+    dest: "{{ user_home }}/.ssh/{{ item }}"
+    mode: '0600'
+  loop:
+    - git
+    - git.pub
+
+- name: Add to keychain on startup
+  copy:
+    dest: "{{ user_home }}/.config/fish/conf.d/wsl-machine.fish"
+    content: |
+      eval (keychain --agents ssh --eval git)

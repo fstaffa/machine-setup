@@ -1,0 +1,36 @@
+---
+# tasks file for common
+- name: Install utilities
+  apt:
+    pkg:
+      - git
+      - fish
+      - curl
+      - tmux
+      - fzf
+      - fasd
+      - python3
+      - jq
+      - lftp
+      - silversearcher-ag
+      - keychain
+      - python3-pip
+      - python3-venv
+
+- name: Set user settings
+  user:
+    name: "{{ username }}"
+    shell: /usr/bin/fish
+
+- name: Install fnm dependencies utilities
+  apt:
+    pkg:
+      - unzip
+      - curl
+      - xz-utils
+      - netbase
+
+- name: Set fish as default shell
+  user:
+    name: "{{ username }}"
+    shell: /usr/bin/fish

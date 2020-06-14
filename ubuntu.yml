@@ -1,0 +1,31 @@
+---
+- hosts: all
+  vars:
+    username: mathematician314
+    fnm_nodejs_versions: ["latest-v12.x"]
+    fnm_npm_global_packages:
+      - name: fx
+      - name: lodash
+  tasks:
+    - name: Get fnm_user from passwd database
+      getent:
+        database: passwd
+        key: "{{ username }}"
+        split: ":"
+    - name: Define user_home
+      set_fact:
+        user_home: "{{ getent_passwd[username][4] }}"
+    - name: Define bins folder
+      set_fact:
+        bin_folder: "{{ user_home }}/data/bin"
+    - name: Create bin folder
+      file:
+        owner: "{{ username }}"
+        path: "{{ bin_folder }}"
+        state: directory
+    - include_role:
+        name: wsl
+    - include_role:
+        name: common
+    - include_role:
+        name: work
