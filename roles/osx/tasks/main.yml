@@ -1,0 +1,60 @@
+---
+- name: Install brew
+  shell:
+    cmd: /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+  args:
+    creates: "/usr/local/bin/brew"
+- name: Install brew packages
+  become: true
+  become_user: "{{username}}"
+  homebrew:
+    name:
+      - aspell
+      - aria2
+      - bat
+      - fasd
+      - fzf
+      - git
+      - gnupg
+      - go
+      - hugo
+      - jid
+      - jq
+      - lftp
+      - openssl
+      - openssl@1.1
+      - p7zip
+      - pipenv
+      - pyenv
+      - python
+      - readline
+      - rtv
+      - eqnxio/cimpress-cloud-engineering/stskeygen
+      - tealdeer
+      - terraform
+      - tokei
+      - tmux
+      - the_silver_searcher
+      - vegeta
+      - wtfutil
+
+- name: Install brew cask packages
+  become: true
+  become_user: "{{username}}"
+  homebrew:
+    name:
+      - aws-vault
+      - google-chrome
+      - dropbox
+      - emacs
+      - firefox
+      - iterm2
+      - jetbrains-toolbox
+      - postman
+      - steam
+      - vagrant
+      - vlc
+      - visual-studio-code
+      - virtualbox
+      - virtualbox-extension-pack
+      - wireshark

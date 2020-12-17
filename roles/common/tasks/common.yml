@@ -52,11 +52,12 @@
 
 - name: Install pipx
   pip:
+    executable: pip3
     name: pipx
 
 - name: Python on startup
   copy:
-    dest: "{{ user_home }}/.config/fish/conf.d/python.fish"
+    dest: "{{ user_home }}/.config/fish/conf.d/__python.fish"
     content: |
       set -gx PATH $PATH "{{ user_home }}/.local/bin"
       register-python-argcomplete --shell fish pipx | .
@@ -64,13 +65,13 @@
 - name: Install youtube-dl
   command:
     cmd:
-      python3 -m pipx install youtube-dl
+      pipx install youtube-dl
     creates:
       "{{ user_home }}/.local/bin/youtube-dl"
 
 - name: Install the fuck
   command:
     cmd:
-      python3 -m pipx install thefuck
+      pipx install thefuck
     creates:
       "{{ user_home }}/.local/bin/thefuck"
