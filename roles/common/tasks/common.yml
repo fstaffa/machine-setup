@@ -23,15 +23,16 @@
 - name: Chezmoi init
   shell:
     cmd: |
-      {{ bin_folder }}/chezmoi init https://github.com/fstaffa/dotfiles.git
+      {{ bin_folder }}/chezmoi init git://github.com/fstaffa/dotfiles.git
   args:
     creates: "{{ user_home }}/.local/share/chezmoi/dot_tmux.conf"
-- name: Chezmoi get data
-  shell:
-    cmd: |
-      {{ bin_folder }}/chezmoi apply
-  args:
-    creates: "{{ user_home }}/.tmux.conf"
+
+- name: Set ansible tmp to current user
+  become: yes
+  file:
+    path: "{{ user_home }}/.ansible/tmp"
+    owner: fstaffa
+    state: directory
 
 - name: Install asdf
   git:
@@ -46,9 +47,12 @@
     version: develop
 
 - name: Install spacemacs config
-  git:
-    repo: https://github.com/fstaffa/dotspacemacs.git
-    dest: "{{ user_home }}/.spacemacs.d"
+  include_tasks: git-repo.yml
+  loop:
+    - {
+        repo: git://github.com/fstaffa/dotspacemacs.git,
+        folder: "{{ user_home }}/.spacemacs.d",
+      }
 
 - name: Install pipx
   pip:
@@ -64,14 +68,16 @@
 
 - name: Install youtube-dl
   command:
-    cmd:
-      pipx install youtube-dl
-    creates:
-      "{{ user_home }}/.local/bin/youtube-dl"
+    cmd: pipx install youtube-dl
+    creates: "{{ user_home }}/.local/bin/youtube-dl"
 
 - name: Install the fuck
   command:
-    cmd:
-      pipx install thefuck
-    creates:
-      "{{ user_home }}/.local/bin/thefuck"
+    cmd: pipx install thefuck
+    creates: "{{ user_home }}/.local/bin/thefuck"
+
+- name: Set git name
+  community.general.git_config:
+    name: user.name
+    value: "Filip Staffa"
+    scope: global

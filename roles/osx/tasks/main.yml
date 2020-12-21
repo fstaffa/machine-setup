@@ -41,7 +41,7 @@
 - name: Install brew cask packages
   become: true
   become_user: "{{username}}"
-  homebrew:
+  homebrew_cask:
     name:
       - aws-vault
       - google-chrome
@@ -58,3 +58,14 @@
       - virtualbox
       - virtualbox-extension-pack
       - wireshark
+
+- name: Enable fish shell
+  lineinfile:
+    path: /etc/shells
+    regexp: "/usr/local/bin/fish"
+    line: "/usr/local/bin/fish"
+
+- name: Make fish shell
+  user:
+    name: fstaffa
+    shell: /usr/local/bin/fish

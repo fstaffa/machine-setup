@@ -1,0 +1,19 @@
+---
+- include_tasks: git-repo.yml
+  loop:
+    - {
+        repo: git@gitlab.com:Cimpress-Technology/Sapidus/logistics-configuration-ui.git,
+        folder: logistics-configuration-ui,
+      }
+    - {
+        repo: git@gitlab.com:Cimpress-Technology/Sapidus/configuration-service.git,
+        folder: configuration-service,
+      }
+    - {
+        repo: git@gitlab.com:Cimpress-Technology/labe/shipping-calculator.git,
+        folder: shipping-calculator,
+      }
+    - {
+        repo: git@gitlab.com:Cimpress-Technology/vltava-squad/ccm-next.git,
+        folder: ccm,
+      }

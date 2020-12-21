@@ -1,0 +1,11 @@
+---
+- name: Checkout repo
+  git:
+    repo: "{{ item.repo }}"
+    dest: "{{ user_home }}/data/cimpress/{{ item.folder }}"
+- name: Git config
+  community.general.git_config:
+    name: user.email
+    value: fstaffa@cimpress.com
+    scope: local
+    repo: "{{ user_home }}/data/personal/{{ item.folder }}"

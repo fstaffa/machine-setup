@@ -1,8 +1,11 @@
 ---
 - include: dotnet-ubuntu.yml
-  when: ansible_distribution == 'Debian' or ansible_distribution == 'Ubuntu' 
+  when: ansible_distribution == 'Debian' or ansible_distribution == 'Ubuntu'
 - include: debian.yml
   when: ansible_os_family == 'Debian'
 - include: common.yml
+  become: true
+  become_user: "{{username}}"
+- include: checkout-repos.yml
   become: true
   become_user: "{{username}}"
