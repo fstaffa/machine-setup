@@ -2,8 +2,14 @@
 - name: Clone personal projects
   include_tasks: git-repo.yml
   loop:
-    - { repo: git://github.com/fstaffa/htpc-setup.git, folder: htpc-setup }
+    - { repo: git@github.com:fstaffa/htpc-setup.git, folder: htpc-setup }
     - {
-        repo: git://github.com/fstaffa/common-infrastructure.git,
+        repo: git@github.com:fstaffa/common-infrastructure.git,
         folder: common-infrastructure,
+      }
+    - { repo: git@github.com:fstaffa/machine-setup.git, folder: machine-setup }
+    - { repo: git@github.com:fstaffa/kali.git, folder: kali }
+    - {
+        repo: git@github.com:fstaffa/filipstaffa-net.git,
+        folder: filipstaffa-net,
       }
