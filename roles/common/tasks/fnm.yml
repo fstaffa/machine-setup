@@ -13,6 +13,12 @@
   args:
     creates: "{{ fnm_root }}"
 
+- name: Add fnm link to user bin
+  file:
+    src: "{{ fnm_root }}/fnm"
+    dest: "{{ user_home }}/bin/fnm"
+    state: link
+
 - name: Install nodejs via fnm
   shell:
     cmd: |

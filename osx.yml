@@ -10,7 +10,7 @@
   tasks:
     - name: Define bins folder
       set_fact:
-        bin_folder: "{{ user_home }}/data/bin"
+        bin_folder: "{{ user_home }}/bin"
     - name: Create bin folder
       file:
         owner: "{{ username }}"

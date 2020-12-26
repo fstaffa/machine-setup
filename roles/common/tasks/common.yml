@@ -59,6 +59,11 @@
     executable: pip3
     name: pipx
 
+- name: Ensure fish config directory
+  file: 
+    path: "{{ user_home }}/.config/fish/conf.d/"
+    state: directory
+
 - name: Python on startup
   copy:
     dest: "{{ user_home }}/.config/fish/conf.d/__python.fish"
@@ -66,25 +71,26 @@
       set -gx PATH $PATH "{{ user_home }}/.local/bin"
       register-python-argcomplete --shell fish pipx | .
 
-- name: Install youtube-dl
+- name: Install python applications
   command:
-    cmd: pipx install youtube-dl
-    creates: "{{ user_home }}/.local/bin/youtube-dl"
+    cmd: "pipx install {{ item.module }}"
+    creates: "{{ user_home }}/.local/bin/{{ item.file }}"
+  loop:
+    - { file: "youtube-dl", module: "youtube-dl"}
+    - { file: "thefuck", module: "thefuck"}
+  when: ansible_distribution == 'MacOSX'
 
-- name: Install the fuck
+- name: Install python applications
   command:
-    cmd: pipx install thefuck
-    creates: "{{ user_home }}/.local/bin/thefuck"
+    cmd: "python3 -m pipx install {{ item.module }}"
+    creates: "{{ user_home }}/.local/bin/{{ item.file }}"
+  loop:
+    - { file: "youtube-dl", module: "youtube-dl"}
+    - { file: "thefuck", module: "thefuck"}
+  when: ansible_os_family == 'Debian'
 
 - name: Set git name
   community.general.git_config:
     name: user.name
     value: "Filip Staffa"
     scope: global
-
-- name: Install the mitmproxy
-  command:
-    cmd:
-      pipx install mitmproxy
-    creates:
-      "{{ user_home }}/.local/bin/mitmproxy"
