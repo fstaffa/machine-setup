@@ -1,0 +1,7 @@
+---
+- include: dotnet-ubuntu.yml
+  when: ansible_distribution == 'Debian' or ansible_distribution == 'Ubuntu'
+
+- include: checkout-repos.yml
+  become: true
+  become_user: "{{username}}"

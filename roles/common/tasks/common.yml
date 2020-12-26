@@ -23,7 +23,7 @@
 - name: Chezmoi init
   shell:
     cmd: |
-      {{ bin_folder }}/chezmoi init git://github.com/fstaffa/dotfiles.git
+            {{ bin_folder }}/chezmoi init git@github.com:fstaffa/dotfiles.git
   args:
     creates: "{{ user_home }}/.local/share/chezmoi/dot_tmux.conf"
 
@@ -31,7 +31,7 @@
   become: yes
   file:
     path: "{{ user_home }}/.ansible/tmp"
-    owner: fstaffa
+    owner: "{{username}}"
     state: directory
 
 - name: Install asdf
@@ -81,3 +81,10 @@
     name: user.name
     value: "Filip Staffa"
     scope: global
+
+- name: Install the mitmproxy
+  command:
+    cmd:
+      pipx install mitmproxy
+    creates:
+      "{{ user_home }}/.local/bin/mitmproxy"

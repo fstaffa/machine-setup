@@ -1,8 +1,8 @@
 ---
-- include: dotnet-ubuntu.yml
-  when: ansible_distribution == 'Debian' or ansible_distribution == 'Ubuntu'
 - include: debian.yml
   when: ansible_os_family == 'Debian'
+- include: osx.yml
+  when: ansible_distribution == 'MacOSX'
 - name: Add to known hosts
   known_hosts:
     name: "{{ item.name }}"
@@ -17,8 +17,5 @@
         key: "gitlab.com,172.65.251.78 ecdsa-sha2-nistp256 AAAAE2VjZHNhLXNoYTItbmlzdHAyNTYAAAAIbmlzdHAyNTYAAABBBFSMqzJeV9rUzU4kWitGjeR4PWSa29SPqJ1fVkhtj3Hw9xjLVXVYrU9QlYWrOLXBpQ6KWjbjTDTdDkoohFzgbEY=",
       }
 - include: common.yml
-  become: true
-  become_user: "{{username}}"
-- include: checkout-repos.yml
   become: true
   become_user: "{{username}}"

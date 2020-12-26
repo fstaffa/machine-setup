@@ -3,19 +3,24 @@
 - name: Install utilities
   apt:
     pkg:
-      - git
-      - fish
+      - aspell
+      - aria2
+      - bat
       - curl
-      - tmux
+      - fish
       - fzf
       - fasd
-      - python3
+      - git
       - jq
-      - lftp
-      - silversearcher-ag
       - keychain
+      - lftp
+      - net-tools
+      - python3
+      - silversearcher-ag
       - python3-pip
       - python3-venv
+      - tmux
+      - xdg-utils
 
 - name: Set user settings
   user:
