@@ -30,6 +30,7 @@
       - readline
       - rtv
       - eqnxio/cimpress-cloud-engineering/stskeygen
+      - postgresql
       - tealdeer
       - terraform
       - tokei
@@ -52,6 +53,7 @@
       - jetbrains-toolbox
       - postman
       - steam
+      - syncthing
       - vagrant
       - vlc
       - visual-studio-code
