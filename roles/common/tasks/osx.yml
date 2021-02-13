@@ -7,7 +7,7 @@
 - name: Install brew packages
   become: true
   become_user: "{{username}}"
-  homebrew:
+  community.general.homebrew:
     name:
       - aspell
       - aria2
@@ -18,6 +18,7 @@
       - gnupg
       - go
       - hugo
+      - ipfs
       - jid
       - jq
       - lftp
@@ -42,7 +43,9 @@
 - name: Install brew cask packages
   become: true
   become_user: "{{username}}"
-  homebrew_cask:
+  community.general.homebrew:
+    install_options:
+      - cask
     name:
       - aws-vault
       - google-chrome

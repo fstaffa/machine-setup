@@ -11,13 +11,7 @@
         bash -s -- --skip-shell --install-dir {{ bin_folder }}
     executable: /bin/bash
   args:
-    creates: "{{ fnm_root }}"
-
-- name: Add fnm link to user bin
-  file:
-    src: "{{ fnm_root }}/fnm"
-    dest: "{{ user_home }}/bin/fnm"
-    state: link
+    creates: "{{ bin_folder }}/fnm"
 
 - name: Install nodejs via fnm
   shell:

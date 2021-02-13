@@ -1,11 +1,17 @@
 ---
+- name: Check if repo exists
+  stat:
+    path: "{{ user_home }}/data/personal/{{ item.folder }}"
+  register: result
 - name: Checkout repo
   git:
     repo: "{{ item.repo }}"
     dest: "{{ user_home }}/data/personal/{{ item.folder }}"
+  when: not result.stat.exists
 - name: Git config
   community.general.git_config:
     name: user.email
     value: 294522+fstaffa@users.noreply.github.com
     scope: local
     repo: "{{ user_home }}/data/personal/{{ item.folder }}"
+

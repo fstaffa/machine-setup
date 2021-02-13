@@ -23,7 +23,7 @@
 - name: Chezmoi init
   shell:
     cmd: |
-            {{ bin_folder }}/chezmoi init git@github.com:fstaffa/dotfiles.git
+      {{ bin_folder }}/chezmoi init git@github.com:fstaffa/dotfiles.git
   args:
     creates: "{{ user_home }}/.local/share/chezmoi/dot_tmux.conf"
 
@@ -78,6 +78,7 @@
   loop:
     - { file: "youtube-dl", module: "youtube-dl"}
     - { file: "thefuck", module: "thefuck"}
+    - { file: "gita", module: "gita"}
   when: ansible_distribution == 'MacOSX'
 
 - name: Install python applications
@@ -89,8 +90,11 @@
     - { file: "thefuck", module: "thefuck"}
   when: ansible_os_family == 'Debian'
 
-- name: Set git name
+- name: Set global git settings
   community.general.git_config:
-    name: user.name
-    value: "Filip Staffa"
+    name: "{{ item.key }}"
+    value: "{{ item.value }}"
     scope: global
+  loop:
+    - { key: "user.name", value: "Filip Staffa" }
+    - { key: "pull.ff", value: only }
