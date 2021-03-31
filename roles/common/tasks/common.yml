@@ -7,10 +7,6 @@
   file:
     path: "{{ bin_folder }}"
     state: directory
-- name: Install Fnm
-  become: true
-  become_user: "{{username}}"
-  import_tasks: "fnm.yml"
 
 - name: Install chezmoi
   shell:

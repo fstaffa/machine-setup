@@ -3,3 +3,6 @@
   include: checkout-repos.yml
   become: true
   become_user: "{{username}}"
+- name: Install ubuntu packages
+  include: ubuntu.yml
+  when: ansible_distribution == 'Ubuntu'

@@ -1,17 +1,35 @@
 ---
 # tasks file for wsl
 - name: Copy ssh keys
+  become: true
+  become_user: "{{username}}"
   copy:
-    src: /mnt/c/Users/filip/.ssh/{{ item }}
+    src: "{{host_ssh_folder | mandatory}}/{{ item }}"
     owner: "{{ username }}"
     dest: "{{ user_home }}/.ssh/{{ item }}"
     mode: '0600'
   loop:
-    - git
-    - git.pub
-
-- name: Add to keychain on startup
+    - id_ed25519
+    - id_ed25519.pub
+- name: Create gpg config
+  become: true
+  become_user: "{{username}}"
   copy:
-    dest: "{{ user_home }}/.config/fish/conf.d/wsl-machine.fish"
+    dest: "{{user_home}}/.gnupg/gpg.conf"
     content: |
-      eval (keychain --agents ssh --eval git)
+      use-agent
+      pinentry-mode loopback
+
+- name: Install jetbrains projector dependencies
+  apt:
+    pkg:
+      - libxext6
+      - libxrender1
+      - libxtst6
+      - libfreetype6
+      - libxi6
+
+- name: Install jetbrains projector
+  pip:
+    executable: pip3
+    name: projector-installer
