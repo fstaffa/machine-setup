@@ -4,11 +4,8 @@
     username: mathematician314
     host_ssh_folder: /mnt/c/Users/Filip/.ssh
     user_home: /home/mathematician314
-    bin_folder: /home/mathematician314 
+    bin_folder: /home/mathematician314/bin 
   tasks:
-    - name: Define bins folder
-      set_fact:
-        bin_folder: "{{ user_home }}/bin"
     - name: Create bin folder
       file:
         owner: "{{ username }}"

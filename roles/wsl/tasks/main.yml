@@ -1,5 +1,11 @@
 ---
 # tasks file for wsl
+- name: Create .ssh folder
+  become: true
+  become_user: "{{username}}"
+  file:
+    path: "{{ user_home}}/.ssh"
+    state: directory
 - name: Copy ssh keys
   become: true
   become_user: "{{username}}"
@@ -11,6 +17,13 @@
   loop:
     - id_ed25519
     - id_ed25519.pub
+- name: Create .gnupg folder
+  become: true
+  become_user: "{{username}}"
+  file:
+    path: "{{ user_home}}/.gnupg"
+    state: directory
+    mode: "0700"
 - name: Create gpg config
   become: true
   become_user: "{{username}}"

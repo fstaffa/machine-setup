@@ -7,7 +7,6 @@
       - aria2
       - bat
       - curl
-      - fish
       - fzf
       - fasd
       - git
@@ -34,6 +33,15 @@
       - curl
       - xz-utils
       - netbase
+
+- name: Install fish repository
+  ansible.builtin.apt_repository:
+    repo: ppa:fish-shell/release-3
+
+- name: Install fnm dependencies utilities
+  apt:
+    pkg:
+      - fish
 
 - name: Set fish as default shell
   user:

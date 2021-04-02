@@ -22,6 +22,13 @@
       {{ bin_folder }}/chezmoi init git@github.com:fstaffa/dotfiles.git
   args:
     creates: "{{ user_home }}/.local/share/chezmoi/dot_tmux.conf"
+- name: Chezmoi config
+  copy:
+    dest: "{{user_home}}/.config/chezmoi/chezmoi.toml"
+    content: |
+      encryption = "gpg"
+      [gpg]
+        symmetric = true
 
 - name: Set ansible tmp to current user
   become: yes
@@ -45,6 +52,10 @@
 - name: Install spacemacs config
   include_tasks: git-repo.yml
   loop:
+    - {
+        repo: git://github.com/fstaffa/dotspacemacs.git,
+        folder: "{{ user_home }}/.spacemacs.d",
+      }
     - {
         repo: git://github.com/fstaffa/dotspacemacs.git,
         folder: "{{ user_home }}/.spacemacs.d",
@@ -93,4 +104,5 @@
     scope: global
   loop:
     - { key: "user.name", value: "Filip Staffa" }
+    - { key: "user.email", value: "294522+fstaffa@users.noreply.github.com" }
     - { key: "pull.ff", value: only }
