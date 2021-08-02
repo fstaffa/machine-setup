@@ -46,3 +46,9 @@
   pip:
     executable: pip3
     name: projector-installer
+
+- name: Install jetbrains ide dependencies
+  apt:
+    pkg:
+      - libnss3
+      - libgbm1

@@ -9,6 +9,7 @@
       - curl
       - fzf
       - fasd
+      - ffmpeg
       - git
       - jq
       - keychain

@@ -71,13 +71,6 @@
     path: "{{ user_home }}/.config/fish/conf.d/"
     state: directory
 
-- name: Python on startup
-  copy:
-    dest: "{{ user_home }}/.config/fish/conf.d/__python.fish"
-    content: |
-      set -gx PATH $PATH "{{ user_home }}/.local/bin"
-      register-python-argcomplete --shell fish pipx | .
-
 - name: Install python applications
   command:
     cmd: "pipx install {{ item.module }}"
