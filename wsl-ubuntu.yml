@@ -4,7 +4,7 @@
     username: mathematician314
     host_ssh_folder: /mnt/c/Users/Filip/.ssh
     user_home: /home/mathematician314
-    bin_folder: /home/mathematician314/bin 
+    bin_folder: /home/mathematician314/bin
   tasks:
     - name: Create bin folder
       file:
@@ -16,4 +16,3 @@
     - common
     - development
     - work
-    

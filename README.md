@@ -20,6 +20,12 @@ chezmoi apply
 curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip" && unzip awscliv2.zip && sudo ./aws/install
 ```
 
+Running the changes in fish
+
+```fish
+sudo (which ansible-playbook) -i "localhost," -c local wsl-ubuntu.yml
+```
+
 # Mac OS
 
 ```

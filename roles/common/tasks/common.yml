@@ -67,7 +67,7 @@
     name: pipx
 
 - name: Ensure fish config directory
-  file: 
+  file:
     path: "{{ user_home }}/.config/fish/conf.d/"
     state: directory
 
@@ -76,9 +76,9 @@
     cmd: "pipx install {{ item.module }}"
     creates: "{{ user_home }}/.local/bin/{{ item.file }}"
   loop:
-    - { file: "youtube-dl", module: "youtube-dl"}
-    - { file: "thefuck", module: "thefuck"}
-    - { file: "gita", module: "gita"}
+    - { file: "youtube-dl", module: "youtube-dl" }
+    - { file: "thefuck", module: "thefuck" }
+    - { file: "gita", module: "gita" }
   when: ansible_distribution == 'MacOSX'
 
 - name: Install python applications
@@ -86,8 +86,8 @@
     cmd: "python3 -m pipx install {{ item.module }}"
     creates: "{{ user_home }}/.local/bin/{{ item.file }}"
   loop:
-    - { file: "youtube-dl", module: "youtube-dl"}
-    - { file: "thefuck", module: "thefuck"}
+    - { file: "youtube-dl", module: "youtube-dl" }
+    - { file: "thefuck", module: "thefuck" }
   when: ansible_os_family == 'Debian'
 
 - name: Set global git settings
@@ -99,3 +99,4 @@
     - { key: "user.name", value: "Filip Staffa" }
     - { key: "user.email", value: "294522+fstaffa@users.noreply.github.com" }
     - { key: "pull.ff", value: only }
+    - { key: "core.editor", value: vim }

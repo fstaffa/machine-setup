@@ -13,7 +13,7 @@
     src: "{{host_ssh_folder | mandatory}}/{{ item }}"
     owner: "{{ username }}"
     dest: "{{ user_home }}/.ssh/{{ item }}"
-    mode: '0600'
+    mode: "0600"
   loop:
     - id_ed25519
     - id_ed25519.pub
