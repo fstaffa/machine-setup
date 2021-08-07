@@ -1,8 +1,13 @@
 ---
+- stat: path="{{ item.folder }}"
+  register: repo_stat
+
 - name: Checkout repo
   git:
     repo: "{{ item.repo }}"
-    dest: "{{ user_home }}/data/personal/{{ item.folder }}"
+    dest: "{{ item.folder }}"
+  when: not repo_stat.stat.exists
+
 - name: Git config
   community.general.git_config:
     name: user.email

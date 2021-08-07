@@ -1,3 +1,4 @@
+---
 name: Yaml Lint
 on: [push]
 jobs:
@@ -10,3 +11,5 @@ jobs:
         with:
           prettier_options: "**/*.{yml,yaml,md} --write"
           dry: true
+      - name: yaml-lint
+        uses: ibiqlik/action-yamllint@v1

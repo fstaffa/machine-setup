@@ -1,0 +1,10 @@
+- name: Install ubuntu emacs build prerequisites packages
+  include: ubuntu.yml
+  when: ansible_distribution == 'Ubuntu'
+
+- name: Checkout emacs
+  become: true
+  become_user: "{{username}}"
+  git:
+    repo: https://git.savannah.gnu.org/git/emacs.git
+    dest: "{{ user_home }}/data/emacs-source"

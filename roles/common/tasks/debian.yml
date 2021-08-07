@@ -16,9 +16,9 @@
       - lftp
       - net-tools
       - python3
-      - silversearcher-ag
       - python3-pip
       - python3-venv
+      - silversearcher-ag
       - tmux
       - xdg-utils
 
@@ -34,6 +34,10 @@
       - curl
       - xz-utils
       - netbase
+
+- name: Install ripgrep from github
+  apt:
+    deb: https://github.com/BurntSushi/ripgrep/releases/download/13.0.0/ripgrep_13.0.0_amd64.deb
 
 - name: Install fish repository
   ansible.builtin.apt_repository:
