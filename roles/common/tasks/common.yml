@@ -31,7 +31,7 @@
         symmetric = true
 
 - name: Set ansible tmp to current user
-  become: yes
+  become: true
   file:
     path: "{{ user_home }}/.ansible/tmp"
     owner: "{{username}}"
