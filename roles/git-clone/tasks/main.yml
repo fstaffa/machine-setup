@@ -1,0 +1,16 @@
+---
+- name: Check if repo exists
+  stat:
+    path: "{{ dest }}"
+  register: result
+- name: Checkout repo
+  git:
+    repo: "{{ repo }}"
+    dest: "{{ dest }}"
+  when: not result.stat.exists
+- name: Git config
+  community.general.git_config:
+    name: user.email
+    value: "{{ email }}"
+    scope: local
+    repo: "{{ dest }}"

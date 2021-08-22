@@ -3,9 +3,12 @@
   include: ubuntu.yml
   when: ansible_distribution == 'Ubuntu'
 
-- name: Checkout emacs
-  become: true
-  become_user: "{{username}}"
-  git:
-    repo: https://git.savannah.gnu.org/git/emacs.git
+- name: Checkout emacs role
+  include_role:
+    name: git-clone
+  vars:
     dest: "{{ user_home }}/data/emacs-source"
+    email: "294522+fstaffa@users.noreply.github.com"
+    repo: https://git.savannah.gnu.org/git/emacs.git
+    ansible_become: true
+    ansible_user: "{{username}}"

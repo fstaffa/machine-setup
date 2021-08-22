@@ -7,6 +7,7 @@
       - aria2
       - bat
       - curl
+      - direnv
       - fzf
       - fasd
       - ffmpeg
@@ -27,14 +28,6 @@
     name: "{{ username }}"
     shell: /usr/bin/fish
 
-- name: Install fnm dependencies utilities
-  apt:
-    pkg:
-      - unzip
-      - curl
-      - xz-utils
-      - netbase
-
 - name: Install ripgrep from github
   apt:
     deb: https://github.com/BurntSushi/ripgrep/releases/download/13.0.0/ripgrep_13.0.0_amd64.deb
@@ -43,7 +36,7 @@
   ansible.builtin.apt_repository:
     repo: ppa:fish-shell/release-3
 
-- name: Install fnm dependencies utilities
+- name: Install fish
   apt:
     pkg:
       - fish

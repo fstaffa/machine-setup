@@ -2,12 +2,8 @@
 - hosts: all
   vars:
     username: mathematician314
-    fnm_nodejs_versions: ["v14.15.3"]
-    fnm_npm_global_packages:
-      - name: fx
-      - name: lodash
   tasks:
-    - name: Get fnm_user from passwd database
+    - name: Get user from passwd database
       getent:
         database: passwd
         key: "{{ username }}"

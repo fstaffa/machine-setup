@@ -3,10 +3,6 @@
   vars:
     username: fstaffa
     user_home: "/Users/fstaffa/"
-    fnm_nodejs_versions: ["v14.15.3"]
-    fnm_npm_global_packages:
-      - name: fx
-      - name: lodash
   tasks:
     - name: Define bins folder
       set_fact:

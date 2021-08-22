@@ -12,8 +12,8 @@
         path: "{{ bin_folder }}"
         state: directory
   roles:
+    - work
     - wsl
     - common
     - development
-    - work
     - emacs
