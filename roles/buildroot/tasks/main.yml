@@ -1,0 +1,37 @@
+---
+- name: Install dependencies
+  apt:
+    pkg:
+      - git
+      - build-essential
+      - wget
+      - cpio
+      - unzip
+      - rsync
+      - bc
+      - libncurses5-dev
+      - screen
+
+- name: Ensure cloned folder
+  become: true
+  become_user: "{{username}}"
+  ansible.builtin.file:
+    state: directory
+    path: "{{ user_home }}/data/cloned"
+    mode: '0750'
+
+- name: Ensure buildroot folder
+  become: true
+  become_user: "{{username}}"
+  ansible.builtin.file:
+    state: directory
+    path: "{{ user_home }}/data/cloned/buildroot"
+    mode: '0750'
+
+- name: Get buildroot
+  become: true
+  become_user: "{{username}}"
+  ansible.builtin.unarchive:
+    src: https://buildroot.org/downloads/buildroot-2021.02.4.tar.gz
+    remote_src: true
+    dest: "{{ user_home }}/data/cloned/buildroot"
