@@ -12,6 +12,7 @@
         path: "{{ bin_folder }}"
         state: directory
   roles:
+    - kubectl
     - work
     - wsl
     - common

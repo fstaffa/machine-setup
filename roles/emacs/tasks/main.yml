@@ -3,7 +3,7 @@
   include: ubuntu.yml
   when: ansible_distribution == 'Ubuntu'
 
-- name: Checkout emacs role
+- name: Checkout emacs
   include_role:
     name: git-clone
   vars:
