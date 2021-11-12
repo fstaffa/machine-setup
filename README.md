@@ -34,3 +34,11 @@ brew install font-caskaydia-cove-nerd-font
 
 
 ```
+
+# guix
+
+``` fish
+sudo apt-get install nscd
+sudo apt-get install deamonize
+sudo /etc/init.d/guix-daemon start
+```

@@ -39,6 +39,12 @@
       folder: vltava-infrastructure
     - repo: git@gitlab.com:Cimpress-Technology/labe/qpzip-comparison.git
       folder: qpzip-comparison
+    - repo: git@gitlab.com:Cimpress-Technology/praguematic/address-validation-api.git
+      folder: address-validation
+    - repo: git@gitlab.com:Cimpress-Technology/praguematic/address-validation-workflow-step.git
+      folder: address-validation-workflow-step
+    - repo: git@gitlab.com:Cimpress-Technology/qp/ship-date.git
+      folder: shipdate
 - name: Install ubuntu packages
   include: ubuntu.yml
   when: ansible_distribution == 'Ubuntu'
