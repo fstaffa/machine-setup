@@ -1,0 +1,24 @@
+---
+
+- name: Clone personal projects
+  include_role:
+    name: git-clone
+  vars:
+    dest: "{{ user_home }}/data/personal/{{ item.folder }}"
+    email: 294522+fstaffa@users.noreply.github.com
+    repo: "{{ item.repo }}"
+    ansible_become: true
+    ansible_become_user: "{{username}}"
+  loop:
+    - repo: git@github.com:fstaffa/htpc-setup.git
+      folder: htpc-setup
+    - repo: git@github.com:fstaffa/common-infrastructure.git
+      folder: common-infrastructure
+    - repo: git@github.com:fstaffa/machine-setup.git
+      folder: machine-setup
+    - repo: git@github.com:fstaffa/kali.git
+      folder: kali
+    - repo: git@github.com:fstaffa/filipstaffa-net.git
+      folder: filipstaffa-net
+    - repo: git@github.com:fstaffa/kc-hrubeho.git
+      folder: kc-hrubeho

@@ -1,0 +1,19 @@
+---
+
+- name: Install docker
+  community.general.pacman:
+    name:
+      - docker
+    state: present
+
+- name: Start service
+  ansible.builtin.systemd:
+    name: docker.service
+    state: started
+    enabled: yes
+
+- name: Add user to docker group
+  ansible.builtin.user:
+    name: mathematician314
+    groups: docker
+    append: yes

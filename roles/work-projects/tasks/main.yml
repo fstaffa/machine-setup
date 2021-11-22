@@ -1,0 +1,48 @@
+---
+
+- name: Checkout cimpress repos
+  include_role:
+    name: git-clone
+  vars:
+    dest: "{{ user_home }}/data/cimpress/{{ item.folder }}"
+    email: "fstaffa@cimpress.com"
+    repo: "{{ item.repo }}"
+    ansible_become: true
+    ansible_become_user: "{{username}}"
+  loop:
+    - repo: git@gitlab.com:Cimpress-Technology/labe/infrastructure/bastion.git
+      folder: bastion-labe
+    - repo: git@gitlab.com:Cimpress-Technology/labe/calendars-ui.git
+      folder: calendars-ui
+    - repo: git@gitlab.com:Cimpress-Technology/vltava-squad/ccm-next.git
+      folder: ccm
+    - repo: git@gitlab.com:Cimpress-Technology/Sapidus/configuration-service.git
+      folder: configuration-service
+    - repo: git@gitlab.com:Cimpress-Technology/Sapidus/deployment.git
+      folder: deployment-sapidus
+    - repo: git@gitlab.com:Cimpress-Technology/Sapidus/logistics-configuration-ui.git
+      folder: logistics-configuration-ui
+    - repo: git@gitlab.com:Cimpress-Technology/vltava-squad/pickups-aggregation-service.git
+      folder: picky
+    - repo: git@gitlab.com:Cimpress-Technology/praguematic/planning-api-service.git
+      folder: planning-api
+    - repo: git@gitlab.com:Cimpress-Technology/praguematic/pup-scraper-service.git
+      folder: pup-scraper-service
+    - repo: git@gitlab.com:Cimpress-Technology/Sapidus/Quoter-Publisher.git
+      folder: quoter-publisher
+    - repo: git@gitlab.com:Cimpress-Technology/labe/shipping-calculator.git
+      folder: shipping-calculator
+    - repo: git@gitlab.com:Cimpress-Technology/praguematic/shipping-options-service.git
+      folder: shippping-options
+    - repo: git@gitlab.com:Cimpress-Technology/qp/shipping-recommendation.git
+      folder: shiprec
+    - repo: git@gitlab.com:Cimpress-Technology/vltava-squad/vltava-infrastructure.git
+      folder: vltava-infrastructure
+    - repo: git@gitlab.com:Cimpress-Technology/labe/qpzip-comparison.git
+      folder: qpzip-comparison
+    - repo: git@gitlab.com:Cimpress-Technology/praguematic/address-validation-api.git
+      folder: address-validation
+    - repo: git@gitlab.com:Cimpress-Technology/praguematic/address-validation-workflow-step.git
+      folder: address-validation-workflow-step
+    - repo: git@gitlab.com:Cimpress-Technology/qp/ship-date.git
+      folder: shipdate

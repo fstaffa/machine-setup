@@ -1,0 +1,14 @@
+---
+- hosts: all
+  vars:
+    username: mathematician314
+  roles:
+    - games
+    - fish
+    - slack
+    - rambox
+    - work
+    - development
+    - kde
+    - qemu
+    - docker

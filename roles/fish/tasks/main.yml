@@ -1,0 +1,11 @@
+---
+- name: Update packages & caches
+  community.general.pacman:
+    update_cache: yes
+    upgrade: yes
+
+- name: Install fish
+  community.general.pacman:
+    name:
+      - fish
+    state: present

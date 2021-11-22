@@ -1,0 +1,20 @@
+---
+- name: Update packages & caches
+  community.general.pacman:
+    update_cache: yes
+    upgrade: yes
+
+- name: Install lutris with dependencies
+  community.general.pacman:
+    name:
+      - wine
+      - winetricks
+      - wine-mono
+      - wine_gecko
+      - vulkan-icd-loader
+      - lib32-vulkan-icd-loader
+      - vkd3d
+      - lib32-vkd3d
+      - gvfs
+      - lutris
+    state: present

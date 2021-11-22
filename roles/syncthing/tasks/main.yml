@@ -1,0 +1,11 @@
+---
+- name: Update packages & caches
+  community.general.pacman:
+    update_cache: yes
+    upgrade: yes
+
+- name: Install syncthing
+  community.general.pacman:
+    name:
+      - syncthing
+    state: present

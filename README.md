@@ -42,3 +42,9 @@ sudo apt-get install nscd
 sudo apt-get install deamonize
 sudo /etc/init.d/guix-daemon start
 ```
+
+# syncthing
+
+``` fish
+systemctl --user start syncthing.service 
+```

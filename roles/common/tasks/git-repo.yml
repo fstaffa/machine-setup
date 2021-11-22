@@ -13,4 +13,4 @@
     name: user.email
     value: 294522+fstaffa@users.noreply.github.com
     scope: local
-    repo: "{{ user_home }}/data/personal/{{ item.folder }}"
+    repo: "{{ item.folder }}"

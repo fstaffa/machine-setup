@@ -1,0 +1,66 @@
+---
+- name: Create bin folder
+  file:
+    path: "{{ bin_folder }}"
+    state: directory
+
+- name: Install chezmoi
+  shell:
+    cmd: |
+      curl -fsSL https://git.io/chezmoi | \
+        bash -s -- -b {{ bin_folder }}
+    executable: /bin/bash
+  args:
+    creates: "{{ bin_folder}}/chezmoi"
+- name: Set ansible tmp to current user
+  become: true
+  file:
+    path: "{{ user_home }}/.ansible/tmp"
+    owner: "{{username}}"
+    state: directory
+
+- name: Install asdf
+  git:
+    repo: https://github.com/asdf-vm/asdf.git
+    dest: "{{ user_home }}/.asdf"
+    version: v0.7.8
+
+- name: Install spacemacs config
+  include_tasks: git-repo.yml
+  loop:
+    - repo: git://github.com/fstaffa/dotspacemacs.git
+      folder: "{{ user_home }}/.spacemacs.d"
+
+- name: Install pipx
+  pip:
+    executable: pip3
+    name: pipx
+
+- name: Ensure fish config directory
+  file:
+    path: "{{ user_home }}/.config/fish/conf.d/"
+    state: directory
+
+- name: Install python applications
+  command:
+    cmd: "pipx install {{ item.module }}"
+    creates: "{{ user_home }}/.local/bin/{{ item.file }}"
+  loop:
+    - file: "youtube-dl"
+      module: "youtube-dl"
+    - file: "thefuck"
+      module: "thefuck"
+    - file: "gita"
+      module: "gita"
+  when: ansible_distribution == 'MacOSX'
+
+- name: Install python applications
+  command:
+    cmd: "python3 -m pipx install {{ item.module }}"
+    creates: "{{ user_home }}/.local/bin/{{ item.file }}"
+  loop:
+    - file: "youtube-dl"
+      module: "youtube-dl"
+    - file: "thefuck"
+      module: "thefuck"
+  when: ansible_os_family == 'Debian'

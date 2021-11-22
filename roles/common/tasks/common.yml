@@ -3,45 +3,6 @@
   file:
     path: "{{ bin_folder }}"
     state: directory
-- name: Create bin folder
-  file:
-    path: "{{ bin_folder }}"
-    state: directory
-
-- name: Install chezmoi
-  shell:
-    cmd: |
-      curl -fsSL https://git.io/chezmoi | \
-        bash -s -- -b {{ bin_folder }}
-    executable: /bin/bash
-  args:
-    creates: "{{ bin_folder}}/chezmoi"
-- name: Chezmoi init
-  shell:
-    cmd: |
-      {{ bin_folder }}/chezmoi init git@github.com:fstaffa/dotfiles.git
-  args:
-    creates: "{{ user_home }}/.local/share/chezmoi/dot_tmux.conf"
-- name: Chezmoi config
-  copy:
-    dest: "{{user_home}}/.config/chezmoi/chezmoi.toml"
-    content: |
-      encryption = "gpg"
-      [gpg]
-        symmetric = true
-
-- name: Set ansible tmp to current user
-  become: true
-  file:
-    path: "{{ user_home }}/.ansible/tmp"
-    owner: "{{username}}"
-    state: directory
-
-- name: Install asdf
-  git:
-    repo: https://github.com/asdf-vm/asdf.git
-    dest: "{{ user_home }}/.asdf"
-    version: v0.7.8
 
 - name: Install doom emacs
   git:
@@ -50,12 +11,6 @@
     dest: "{{ user_home }}/.emacs.d"
     version: develop
 
-- name: Install spacemacs config
-  include_tasks: git-repo.yml
-  loop:
-    - repo: git://github.com/fstaffa/dotspacemacs.git
-      folder: "{{ user_home }}/.spacemacs.d"
-
 - name: Install doom config
   include_tasks: git-repo.yml
   loop:
@@ -63,39 +18,24 @@
       folder: "{{ user_home }}/.doom.d"
       update: false
 
-- name: Install pipx
-  pip:
-    executable: pip3
-    name: pipx
 
-- name: Ensure fish config directory
+- name: Chezmoi init
+  shell:
+    cmd: |
+      chezmoi init git@github.com:fstaffa/dotfiles.git
+  args:
+    creates: "{{ user_home }}/.local/share/chezmoi/dot_tmux.conf"
+- name: Ensure chezmoi folder
   file:
-    path: "{{ user_home }}/.config/fish/conf.d/"
+    path: "{{user_home}}/.config/chezmoi"
     state: directory
-
-- name: Install python applications
-  command:
-    cmd: "pipx install {{ item.module }}"
-    creates: "{{ user_home }}/.local/bin/{{ item.file }}"
-  loop:
-    - file: "youtube-dl"
-      module: "youtube-dl"
-    - file: "thefuck"
-      module: "thefuck"
-    - file: "gita"
-      module: "gita"
-  when: ansible_distribution == 'MacOSX'
-
-- name: Install python applications
-  command:
-    cmd: "python3 -m pipx install {{ item.module }}"
-    creates: "{{ user_home }}/.local/bin/{{ item.file }}"
-  loop:
-    - file: "youtube-dl"
-      module: "youtube-dl"
-    - file: "thefuck"
-      module: "thefuck"
-  when: ansible_os_family == 'Debian'
+- name: Chezmoi config
+  copy:
+    dest: "{{user_home}}/.config/chezmoi/chezmoi.toml"
+    content: |
+      encryption = "gpg"
+      [gpg]
+        symmetric = true
 
 - name: Set global git settings
   community.general.git_config:
@@ -111,3 +51,5 @@
       value: only
     - key: "core.editor"
       value: vim
+    - key: "init.defaultBranch"
+      value: master
