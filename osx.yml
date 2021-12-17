@@ -12,9 +12,7 @@
         owner: "{{ username }}"
         path: "{{ bin_folder }}"
         state: directory
-    - include_role:
-        name: common
-    - include_role:
-        name: development
-    - include_role:
-        name: work
+  roles:
+    - common
+    - personal-projects
+    - work-projects

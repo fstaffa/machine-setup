@@ -46,3 +46,9 @@
       folder: address-validation-workflow-step
     - repo: git@gitlab.com:Cimpress-Technology/qp/ship-date.git
       folder: shipdate
+    - repo: git@gitlab.com:Cimpress-Technology/praguematic/pup-ui-widget.git
+      folder: pup-widget
+    - repo: git@gitlab.com:Cimpress-Technology/praguematic/packer-service.git
+      folder: packer
+    - repo: git@gitlab.com:Cimpress-Technology/praguematic/packer-config-service.git
+      folder: packer-config

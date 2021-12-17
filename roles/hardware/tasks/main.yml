@@ -1,0 +1,8 @@
+---
+
+- name: Install keyboard wally apps
+  community.general.pacman:
+    name:
+      - zsa-wally
+    state: present
+  when: ansible_distribution == 'Archlinux'

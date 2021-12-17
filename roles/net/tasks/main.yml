@@ -1,0 +1,9 @@
+---
+
+- name: Add net
+  community.general.pacman:
+    name:
+      - dotnet-sdk
+      - aspnet-runtime
+    state: present
+  when: ansible_distribution == 'Archlinux'

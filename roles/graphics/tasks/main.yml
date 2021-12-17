@@ -1,0 +1,7 @@
+---
+
+- name: Add blender snap
+  community.general.snap:
+    name: blender
+    classic: yes
+    state: present

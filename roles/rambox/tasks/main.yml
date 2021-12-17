@@ -1,5 +1,0 @@
----
-
-- name: Add rambox snap
-  community.general.snap:
-    name: ramboxpro

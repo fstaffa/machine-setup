@@ -1,0 +1,11 @@
+---
+
+- name: Install junction snap
+  community.general.flatpak:
+    name: re.sonny.Junction
+    state: present
+
+- name: Flatseal
+  community.general.flatpak:
+    name: com.github.tchx84.Flatseal
+    state: present
