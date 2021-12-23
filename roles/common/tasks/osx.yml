@@ -1,9 +1,4 @@
 ---
-- name: Install brew
-  shell:
-    cmd: /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
-  args:
-    creates: "/usr/local/bin/brew"
 - name: Install brew packages
   become: true
   become_user: "{{username}}"
@@ -47,7 +42,6 @@
     install_options:
       - cask
     name:
-      - aws-vault
       - google-chrome
       - dropbox
       - emacs
@@ -55,7 +49,6 @@
       - iterm2
       - jetbrains-toolbox
       - postman
-      - steam
       - syncthing
       - vlc
       - visual-studio-code

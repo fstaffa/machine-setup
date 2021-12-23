@@ -1,0 +1,13 @@
+---
+
+- name: Remove default manjaro installed packages
+  community.general.pacman:
+    name:
+      - k3b
+      - kate
+      - kcalc
+      - kget
+      - qbittorrent
+      - skanlite
+    state: absent
+  when: ansible_distribution == 'Archlinux'

@@ -1,10 +1,5 @@
 ---
 
-- name: Add rambox snap
-  community.general.snap:
-    name: ramboxpro
-    state: present
-
 - name: Add ferdi snap
   community.general.snap:
     name: ferdi
