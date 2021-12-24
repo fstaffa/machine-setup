@@ -1,4 +1,9 @@
 ---
+- name: Tap a Homebrew repository using url, state present
+  community.general.homebrew_tap:
+    name: cimpress-mcp/stskeygen-installers
+    url: 'https://github.com/Cimpress-MCP/stskeygen-installers.git'
+
 - name: Install brew packages
   become: true
   become_user: "{{username}}"
@@ -25,7 +30,7 @@
       - python
       - readline
       - rtv
-      - eqnxio/cimpress-cloud-engineering/stskeygen
+      - stskeygen
       - postgresql
       - tealdeer
       - terraform
@@ -42,7 +47,6 @@
     install_options:
       - cask
     name:
-      - google-chrome
       - dropbox
       - emacs
       - firefox

@@ -3,6 +3,7 @@
   vars:
     username: fstaffa
     user_home: "/Users/fstaffa/"
+    bin_folder: "/users/fstaffa/bin"
   tasks:
     - name: Define bins folder
       set_fact:
