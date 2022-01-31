@@ -12,6 +12,7 @@
         state: directory
   roles:
     - common
+    - guix
     - personal-projects
     - work-projects
     - desktop

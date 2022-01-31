@@ -1,8 +1,0 @@
----
-
-- name: Install bismuth
-  community.general.pacman:
-    name:
-      - kwin-bismuth
-    state: present
-  when: ansible_distribution == 'Archlinux'
