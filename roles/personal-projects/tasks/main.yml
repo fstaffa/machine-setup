@@ -18,3 +18,5 @@
       folder: filipstaffa-net
     - repo: git@github.com:fstaffa/kc-hrubeho.git
       folder: kc-hrubeho
+    - repo: git@github.com:fstaffa/machine-setup.git
+      folder: machine-setup

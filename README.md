@@ -26,6 +26,17 @@ Running the changes in fish
 sudo (which ansible-playbook) -i "localhost," -c local wsl-ubuntu.yml
 ```
 
+# Manjaro
+
+## Guix
+
+``` fish
+cd /tmp
+wget https://git.savannah.gnu.org/cgit/guix.git/plain/etc/guix-install.sh
+chmod +x guix-install.sh
+./guix-install.sh
+```
+
 # Mac OS
 
 ```
