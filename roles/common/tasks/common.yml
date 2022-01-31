@@ -4,21 +4,6 @@
     path: "{{ bin_folder }}"
     state: directory
 
-- name: Install doom emacs
-  git:
-    repo: https://github.com/hlissner/doom-emacs
-    depth: 1
-    dest: "{{ user_home }}/.emacs.d"
-    version: develop
-
-- name: Install doom config
-  include_tasks: git-repo.yml
-  loop:
-    - repo: git://github.com/fstaffa/dotdoom.git
-      folder: "{{ user_home }}/.doom.d"
-      update: false
-
-
 - name: Chezmoi init
   shell:
     cmd: |

@@ -1,0 +1,6 @@
+---
+
+- name: Install gnucash flatpak
+  community.general.flatpak:
+    name: org.gnucash.GnuCash
+    state: present

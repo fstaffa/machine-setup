@@ -1,14 +1,10 @@
 ---
-
 - name: Clone personal projects
   include_role:
     name: git-clone
   vars:
     dest: "{{ user_home }}/data/personal/{{ item.folder }}"
-    email: 294522+fstaffa@users.noreply.github.com
     repo: "{{ item.repo }}"
-    ansible_become: true
-    ansible_become_user: "{{username}}"
   loop:
     - repo: git@github.com:fstaffa/htpc-setup.git
       folder: htpc-setup

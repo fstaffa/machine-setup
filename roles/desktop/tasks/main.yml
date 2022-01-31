@@ -1,6 +1,5 @@
 ---
-
-- name: Install junction snap
+- name: Install junction flatpak
   community.general.flatpak:
     name: re.sonny.Junction
     state: present
@@ -8,4 +7,14 @@
 - name: Flatseal
   community.general.flatpak:
     name: com.github.tchx84.Flatseal
+    state: present
+
+- name: OBS
+  community.general.flatpak:
+    name: com.obsproject.Studio
+    state: present
+
+- name: davmail
+  community.general.flatpak:
+    name: org.davmail.DavMail
     state: present
