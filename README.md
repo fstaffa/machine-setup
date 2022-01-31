@@ -37,6 +37,16 @@ chmod +x guix-install.sh
 ./guix-install.sh
 ```
 
+## Aur packages
+
+* aws-session-manager-plugin
+* brave-bin
+* kwin-bismuth
+* opensnitch
+* quickemu
+* vdhcoapp-bin
+
+
 # Mac OS
 
 ```
