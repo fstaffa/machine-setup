@@ -1,0 +1,28 @@
+---
+
+- name: Configure tmp for build
+  ansible.builtin.lineinfile:
+    path: /etc/makepkg.conf
+    line: "BUILDDIR=/tmp/makepkg"
+    insertafter: "#BUILDDIR=/tmp/makepkg"
+    state: present
+
+- name: Configure number of cores for build
+  ansible.builtin.lineinfile:
+    path: /etc/makepkg.conf
+    line: "MAKEFLAGS=\"-j$(nproc)\""
+    insertafter: "#MAKEFLAGS=\"-j2\""
+    state: present
+
+- name: Install base-devel
+  community.general.pacman:
+    name:
+      - base-devel
+    state: present
+
+- name: Configure color in pacman
+  ansible.builtin.lineinfile:
+    path: /etc/pacman.conf
+    line: "Color"
+    insertafter: "#Color"
+    state: present
