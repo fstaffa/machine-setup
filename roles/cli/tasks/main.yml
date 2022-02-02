@@ -1,0 +1,8 @@
+---
+
+- name: Install cli
+  community.general.pacman:
+    name:
+      - bat
+      - chezmoi
+    state: present

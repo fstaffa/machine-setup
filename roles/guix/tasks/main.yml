@@ -1,0 +1,6 @@
+---
+
+- name: Ensure guix extra profiles folder
+  file:
+    path: "{{user_home}}/.guix-extra-profiles"
+    state: directory

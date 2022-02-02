@@ -9,3 +9,9 @@
     name:
       - syncthing
     state: present
+
+- name: Enable syncthing systemd service
+  ansible.builtin.systemd:
+    state: started
+    name: syncthing@{{username}}.service
+    enabled: yes

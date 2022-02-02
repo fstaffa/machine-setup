@@ -28,7 +28,7 @@
     repo: https://github.com/hlissner/doom-emacs
     depth: 1
     dest: "{{ user_home }}/.dotfiles/doom-emacs"
-    version: develop
+    version: master
 
 - name: Install spacemacs emacs
   git:

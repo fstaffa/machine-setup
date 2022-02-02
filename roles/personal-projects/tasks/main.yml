@@ -20,3 +20,5 @@
       folder: kc-hrubeho
     - repo: git@github.com:fstaffa/machine-setup.git
       folder: machine-setup
+    - repo: git@github.com:fstaffa/guix-repository.git
+      folder: guix-repository
