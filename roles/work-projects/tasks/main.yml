@@ -50,3 +50,5 @@
       folder: packer-config
     - repo: git@gitlab.com:Cimpress-Technology/labe/roadmap.git
       folder: roadmap
+    - repo: git@gitlab.com:Cimpress-Technology/praguematic/exchange-rates.git
+      folder: exchange-rates
