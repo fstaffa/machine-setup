@@ -47,6 +47,18 @@ chmod +x guix-install.sh
 * vdhcoapp-bin
 
 
+## Commands
+
+### Set junction as default for everything
+``` fish
+xdg-mime default re.sonny.Junction.desktop x-scheme-handler/file 
+xdg-settings set default-web-browser re.sonny.Junction.desktop 
+xdg-settings set default-url-scheme-handler https re.sonny.Junction.desktop
+xdg-settings set default-url-scheme-handler http re.sonny.Junction.desktop
+```
+
+### Create 
+
 # Mac OS
 
 ```

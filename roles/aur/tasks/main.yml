@@ -1,5 +1,4 @@
 ---
-
 - name: Configure tmp for build
   ansible.builtin.lineinfile:
     path: /etc/makepkg.conf
@@ -10,8 +9,8 @@
 - name: Configure number of cores for build
   ansible.builtin.lineinfile:
     path: /etc/makepkg.conf
-    line: "MAKEFLAGS=\"-j$(nproc)\""
-    insertafter: "#MAKEFLAGS=\"-j2\""
+    line: 'MAKEFLAGS="-j$(nproc)"'
+    insertafter: '#MAKEFLAGS="-j2"'
     state: present
 
 - name: Install base-devel
@@ -20,9 +19,44 @@
       - base-devel
     state: present
 
+- name: Install vifm
+  community.general.pacman:
+    name:
+      - vifm
+    state: present
+
 - name: Configure color in pacman
   ansible.builtin.lineinfile:
     path: /etc/pacman.conf
     line: "Color"
     insertafter: "#Color"
+    state: present
+
+- name: Create local repo folder
+  ansible.builtin.file:
+    path: "{{ repository_path }}"
+    state: directory
+    recurse: true
+    owner: "{{username}}"
+
+- name: Run create repository
+  ansible.builtin.command: repo-add {{repository_db_file}}
+  become: true
+  become_user: "{{ username }}"
+  args:
+    creates: "{{ repository_db_file }}"
+
+- name: Add repository to pacman config
+  ansible.builtin.blockinfile:
+    path: /etc/pacman.conf
+    block: |
+      [custom]
+      SigLevel = Optional TrustAll
+      Server = file:///{{ repository_path }}
+
+- name: Install manjaro-tools
+  community.general.pacman:
+    name:
+      - manjaro-tools
+      - manjaro-tools-base
     state: present

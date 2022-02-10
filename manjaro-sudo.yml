@@ -3,6 +3,7 @@
   vars:
     username: mathematician314
   roles:
+    - aur
     - cli
     - games
     - fish
@@ -16,5 +17,5 @@
     - graphics
     - net
     - cleanup
-    - aur
     - syncthing
+    - crossover

@@ -1,5 +1,4 @@
 ---
-
 - name: Install arch qemu packages
   community.general.pacman:
     name:
@@ -22,3 +21,11 @@
       - spice-gtk
     state: present
   when: ansible_distribution == 'Archlinux'
+
+- name: Create VM directory
+  ansible.builtin.file:
+    path: "{{vm_directory}}"
+    state: directory
+    recurse: true
+    owner: "{{username}}"
+    attributes: C

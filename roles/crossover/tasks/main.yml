@@ -1,0 +1,6 @@
+---
+- name: Install crossover
+  community.general.pacman:
+    name:
+      - crossover
+    state: present

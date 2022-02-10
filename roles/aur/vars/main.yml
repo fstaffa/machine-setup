@@ -1,0 +1,3 @@
+---
+repository_path: /home/{{username}}/data/custompkgs
+repository_db_file: "{{ repository_path }}/custom.db.tar"

@@ -1,7 +1,12 @@
 ---
-
 - name: Add blender snap
   community.general.snap:
     name: blender
     classic: yes
+    state: present
+
+- name: Peek app
+  community.general.pacman:
+    name:
+      - peek
     state: present
