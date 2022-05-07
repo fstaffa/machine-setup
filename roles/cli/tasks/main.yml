@@ -1,8 +1,14 @@
 ---
-
 - name: Install cli
   community.general.pacman:
     name:
       - bat
       - chezmoi
+    state: present
+
+- name: hunspell
+  community.general.pacman:
+    name:
+      - hunspell
+      - hunspell-en_us
     state: present

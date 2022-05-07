@@ -1,0 +1,7 @@
+---
+- name: Install pyenv
+  community.general.pacman:
+    name:
+      - pyenv
+      - python-poetry
+    state: present

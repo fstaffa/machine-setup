@@ -52,3 +52,5 @@
       folder: roadmap
     - repo: git@gitlab.com:Cimpress-Technology/praguematic/exchange-rates.git
       folder: exchange-rates
+    - repo: git@gitlab.com:Cimpress-Technology/internal-open-source/component-library/react-components.git
+      folder: cimpress-react-components

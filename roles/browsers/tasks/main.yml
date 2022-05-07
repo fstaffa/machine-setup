@@ -1,6 +1,1 @@
 ---
-
-- name: Add ferdi snap
-  community.general.snap:
-    name: ferdi
-    state: present

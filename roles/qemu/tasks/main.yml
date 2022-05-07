@@ -26,6 +26,5 @@
   ansible.builtin.file:
     path: "{{vm_directory}}"
     state: directory
-    recurse: true
     owner: "{{username}}"
     attributes: C

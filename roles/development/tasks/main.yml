@@ -7,3 +7,10 @@
     name: code
     classic: yes
   when: ansible_distribution == 'Archlinux'
+
+- name: Install alacritty terminal emulator
+  community.general.pacman:
+    name:
+      - alacritty
+    state: present
+  when: ansible_distribution == 'Archlinux'
