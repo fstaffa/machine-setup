@@ -23,3 +23,32 @@
     name: mathematician314
     groups: docker
     append: yes
+
+- name: Install podman
+  community.general.pacman:
+    name:
+      - podman
+      - podman-compose
+    state: present
+
+- name: Ensure /etc/subuid
+  ansible.builtin.file:
+    path: /etc/subuid
+    state: touch
+
+- name: Ensure /etc/subgid
+  ansible.builtin.file:
+    path: /etc/subgid
+    state: touch
+
+- name: Configure subuid
+  ansible.builtin.lineinfile:
+    path: /etc/subuid
+    line: "mathematician314:100000:65536"
+    state: present
+
+- name: Configure subgid
+  ansible.builtin.lineinfile:
+    path: /etc/subgid
+    line: "mathematician314:100000:65536"
+    state: present

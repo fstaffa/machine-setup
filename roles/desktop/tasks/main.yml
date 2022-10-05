@@ -18,3 +18,8 @@
   community.general.flatpak:
     name: org.davmail.DavMail
     state: present
+
+- name: Postman
+  community.general.flatpak:
+    name: com.getpostman.Postman
+    state: present

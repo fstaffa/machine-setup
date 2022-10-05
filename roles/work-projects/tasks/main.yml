@@ -54,3 +54,5 @@
       folder: exchange-rates
     - repo: git@gitlab.com:Cimpress-Technology/internal-open-source/component-library/react-components.git
       folder: cimpress-react-components
+    - repo: git@gitlab.com:Cimpress-Technology/praguematic/boxman-service.git
+      folder: boxman-service
